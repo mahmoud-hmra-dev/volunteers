@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'Notifications',
+    'site_title' => 'VOTIBA',
 ];
