@@ -97,9 +97,7 @@
              <div class="form-row">
                     <input type="text" name="address" class="street" id="street" placeholder="Address" required>
                 </div> 
-                <div class="form-row">
-                    <input type="date" name="date" class="street" id="street"  required>
-                </div> 
+             
             
             
                 <div class="form-row">

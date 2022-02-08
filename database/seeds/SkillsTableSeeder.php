@@ -15,23 +15,58 @@ class SkillsTableSeeder extends Seeder
         $skills = [
             [
                 'id' => 1,
-                'name' => 'Laravel',
+                'name' => 'Environment & Widlife Conservation',
             ],
             [
                 'id' => 2,
-                'name' => 'Symfony',
+                'name' => 'Driving Safety',
             ],
             [
                 'id' => 3,
-                'name' => 'Vue.js',
+                'name' => '	Women Protection & Empowerment',
             ],
             [
                 'id' => 4,
-                'name' => 'Angular.js',
+                'name' => 'Literacy and Education',
             ],
             [
                 'id' => 5,
-                'name' => 'React.js',
+                'name' => '	Social Injustice/ Human Rights Support',
+            ]
+            ,
+            [
+                'id' => 6,
+                'name' => '	Mental Health Support',
+            ]
+            ,
+            [
+                'id' => 7,
+                'name' => '	Refugee/ Displaced Population Aid',
+            ]
+            ,
+            [
+                'id' => 8,
+                'name' => '	Child Care and Protection',
+            ]
+            ,
+            [
+                'id' => 9,
+                'name' => '	Elderly Care',
+            ]
+            ,
+            [
+                'id' => 10,
+                'name' => '	Disaster Relief',
+            ]
+            ,
+            [
+                'id' => 11,
+                'name' => '	Health & Medical Services',
+            ]
+            ,
+            [
+                'id' => 12,
+                'name' => 'Humanitarian Aid & Poverty Relief',
             ]
         ];
 

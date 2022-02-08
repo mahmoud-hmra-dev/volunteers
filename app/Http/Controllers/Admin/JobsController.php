@@ -21,6 +21,11 @@ class JobsController extends Controller
         $jobs = Job::all();
 
         return view('admin.jobs.index', compact('jobs'));
+
+        $jobs = job::latest()->paginate(10);
+    
+        return view('admin.jobs.index',compact('jobs'))
+            ->with('i', (request()->input('page', 1) - 1) * 10);
     }
 
     public function create()
@@ -30,6 +35,7 @@ class JobsController extends Controller
         $skills = Skill::all()->pluck('name', 'id');
 
         return view('admin.jobs.create', compact('skills'));
+      
     }
 
     public function store(StoreJobRequest $request)
@@ -37,6 +43,27 @@ class JobsController extends Controller
         $job = Job::create($request->all());
 
         return redirect()->route('admin.jobs.index');
+        $request->validate([
+         
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+  
+        $input = $request->all();
+  
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }
+    
+        job::create($input);
+     
+        return redirect()->route('admin.jobs.index')
+                        ->with('success','job created successfully.');
+        
+
+
     }
 
     public function edit(Job $job)
@@ -63,6 +90,7 @@ class JobsController extends Controller
         abort_if(Gate::denies('job_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $job->load('skills');
+        
 
         return view('admin.jobs.show', compact('job'));
     }

@@ -47,6 +47,12 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.job.fields.description_helper') }}</span>
             </div>
+            {{--  --}}
+            <div class="form-group">
+                <strong>Image:</strong>
+                <input type="file" name="image" class="form-control" placeholder="image">
+            </div>
+            {{--  --}}
             <div class="form-group">
                 <label class="required" for="contact_email">{{ trans('cruds.job.fields.contact_email') }}</label>
                 <input class="form-control {{ $errors->has('contact_email') ? 'is-invalid' : '' }}" type="text" name="contact_email" id="contact_email" value="{{ old('contact_email') }}" required>

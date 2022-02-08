@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'admin/skills';
+    protected $redirectTo = 'admin/jobs';
 
     /**
      * Create a new controller instance.
@@ -60,7 +60,7 @@ class RegisterController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'date' => ['required', 'string', 'max:255'],
+       
          
       
         ]);
@@ -82,7 +82,7 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'phone' => $data['phone'],
             'address' => $data['address'],
-            'date' => $data['date'],
+           
 
          
          
