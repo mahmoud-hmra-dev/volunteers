@@ -11,21 +11,20 @@ use App\Skill;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\{Country,State,City};
 
 class JobsController extends Controller
 {
     public function index()
     {
         abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        $data['countries'] = Country::get(["name","id"]);
         $jobs = Job::all();
 
         return view('admin.jobs.index', compact('jobs'));
+        return view('admin.jobs.index', $data);
 
-        $jobs = job::latest()->paginate(10);
-    
-        return view('admin.jobs.index',compact('jobs'))
-            ->with('i', (request()->input('page', 1) - 1) * 10);
+   
     }
 
     public function create()
@@ -43,24 +42,6 @@ class JobsController extends Controller
         $job = Job::create($request->all());
 
         return redirect()->route('admin.jobs.index');
-        $request->validate([
-         
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
-  
-        $input = $request->all();
-  
-        if ($image = $request->file('image')) {
-            $destinationPath = 'image/';
-            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $profileImage);
-            $input['image'] = "$profileImage";
-        }
-    
-        job::create($input);
-     
-        return redirect()->route('admin.jobs.index')
-                        ->with('success','job created successfully.');
         
 
 
@@ -109,5 +90,17 @@ class JobsController extends Controller
         Job::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+    public function getState(Request $request)
+    {
+        $data['states'] = State::where("country_id",$request->country_id)
+                    ->get(["name","id"]);
+        return response()->json($data);
+    }
+    public function getCity(Request $request)
+    {
+        $data['cities'] = City::where("state_id",$request->state_id)
+                    ->get(["name","id"]);
+        return response()->json($data);
     }
 }

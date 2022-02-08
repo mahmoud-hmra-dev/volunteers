@@ -47,12 +47,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.job.fields.description_helper') }}</span>
             </div>
-            {{--  --}}
-            <div class="form-group">
-                <strong>Image:</strong>
-                <input type="file" name="image" class="form-control" placeholder="image">
-            </div>
-            {{--  --}}
+            
             <div class="form-group">
                 <label class="required" for="contact_email">{{ trans('cruds.job.fields.contact_email') }}</label>
                 <input class="form-control {{ $errors->has('contact_email') ? 'is-invalid' : '' }}" type="text" name="contact_email" id="contact_email" value="{{ old('contact_email') }}" required>
@@ -64,6 +59,35 @@
                 <span class="help-block">{{ trans('cruds.job.fields.contact_email_helper') }}</span>
             </div>
             <div class="form-group">
+           
+            
+{{-- 
+                <div class="card-body">
+                    <form>
+                    <div class="form-group">
+                    <label for="country">Country</label>
+                    <select class="form-control" id="country-dropdown">
+                    <option value="">Select Country</option>
+                    @foreach ($countries as $country) 
+                    <option value="{{$country->id}}">
+                    {{$country->name}}
+                    </option>
+                    @endforeach
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label for="state">City</label>
+                    <select class="form-control" id="state-dropdown">
+                    </select>
+                    </div>                        
+                    
+                    </form>
+                    </div> --}}
+            </div>
+
+
+    
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
@@ -72,6 +96,89 @@
     </div>
 </div>
 
-
+<script>
+    $(document).ready(function() {
+    $('#country-dropdown').on('change', function() {
+    var country_id = this.value;
+    $("#state-dropdown").html('');
+    $.ajax({
+    url:"{{url('get-states-by-country')}}",
+    type: "POST",
+    data: {
+    country_id: country_id,
+    _token: '{{csrf_token()}}' 
+    },
+    dataType : 'json',
+    success: function(result){
+    $('#state-dropdown').html('<option value="">Select State</option>'); 
+    $.each(result.states,function(key,value){
+    $("#state-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
+    });
+    $('#city-dropdown').html('<option value="">Select State First</option>'); 
+    }
+    });
+    });    
+    $('#state-dropdown').on('change', function() {
+    var state_id = this.value;
+    $("#city-dropdown").html('');
+    $.ajax({
+    url:"{{url('get-cities-by-state')}}",
+    type: "POST",
+    data: {
+    state_id: state_id,
+    _token: '{{csrf_token()}}' 
+    },
+    dataType : 'json',
+    success: function(result){
+    $('#city-dropdown').html('<option value="">Select City</option>'); 
+    $.each(result.cities,function(key,value){
+    $("#city-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
+    });
+    }
+    });
+    });
+    });
+    </script>
+    <script>
+        $(document).ready(function() {
+        $('#country-dropdown').on('change', function() {
+        var country_id = this.value;
+        $("#state-dropdown").html('');
+        $.ajax({
+        url:"{{url('get-states-by-country')}}",
+        type: "POST",
+        data: {
+        country_id: country_id,
+        _token: '{{csrf_token()}}'
+        },
+        dataType : 'json',
+        success: function(result){
+        $.each(result.states,function(key,value){
+        $("#state-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
+        });
+        $('#city-dropdown').html('<option value="">Select State First</option>'); 
+        }
+        });
+        });    
+        $('#state-dropdown').on('change', function() {
+        var state_id = this.value;
+        $("#city-dropdown").html('');
+        $.ajax({
+        url:"{{url('get-cities-by-state')}}",
+        type: "POST",
+        data: {
+        state_id: state_id,
+        _token: '{{csrf_token()}}'
+        },
+        dataType : 'json',
+        success: function(result){
+        $.each(result.cities,function(key,value){
+        $("#city-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
+        });
+        }
+        });
+        });
+        });
+        </script>
 
 @endsection

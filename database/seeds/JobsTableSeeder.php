@@ -19,7 +19,7 @@ class JobsTableSeeder extends Seeder
             Job::create([
                 'title' => $faker->sentence,
                 'description' => $faker->paragraph,
-                'image' => '$faker->paragraph,',
+               
                 'contact_email' => $faker->companyEmail 
             ]);
         }

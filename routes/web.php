@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 Route::redirect('/', '/login');
@@ -34,3 +35,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('jobs/destroy', 'JobsController@massDestroy')->name('jobs.massDestroy');
     Route::resource('jobs', 'JobsController');
 });
+Route::get('/welcome', function () {
+ 
+    
+
+    return view('welcome');
+});
+
+
+Route::get('country-state-city','CountryStateCityController@index');
+Route::post('get-states-by-country','CountryStateCityController@getState');
+Route::post('get-cities-by-state','CountryStateCityController@getCity');
+

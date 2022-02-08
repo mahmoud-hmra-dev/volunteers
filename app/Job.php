@@ -24,7 +24,7 @@ class Job extends Model
         'updated_at',
         'deleted_at',
         'description',
-        'image',
+     
         'contact_email',
     ];
 
