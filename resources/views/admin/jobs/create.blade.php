@@ -14,7 +14,7 @@
                 <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', '') }}" required>
                 @if($errors->has('title'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('title') }}
+                        {{ $errsors->first('title') }}
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.job.fields.title_helper') }}</span>
