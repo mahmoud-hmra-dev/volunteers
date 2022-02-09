@@ -17,8 +17,7 @@ class CreateJobsTable extends Migration
             $table->string('contact_email');
             $table->string('image');
             $table->longText('description')->nullable();
-          
-
+        
             $table->timestamps();
 
             $table->softDeletes();
