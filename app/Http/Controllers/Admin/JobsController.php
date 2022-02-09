@@ -11,6 +11,7 @@ use App\Skill;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\{Country,State,City};
 
 
 class JobsController extends Controller
@@ -18,15 +19,15 @@ class JobsController extends Controller
     public function index()
     {
         abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-     
+        $countries = Country::get(["name","id"]);
         $jobs = Job::all();
-        $jobs = job::latest()->paginate(5);
+       
   
        
             
         
 
-        return view('admin.jobs.index', compact('jobs'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('admin.jobs.index', compact('jobs','countries'));
      
 
    
@@ -34,11 +35,13 @@ class JobsController extends Controller
 
     public function create()
     {
-        abort_if(Gate::denies('job_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    
+        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $countries = Country::get(["name","id"]);
 
         $skills = Skill::all()->pluck('name', 'id');
 
-        return view('admin.jobs.create', compact('skills'));
+        return view('admin.jobs.create', compact('skills','countries'));
       
     }
 

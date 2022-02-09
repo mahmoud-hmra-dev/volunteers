@@ -47,5 +47,8 @@ Route::get('country-state-city','CountryStateCityController@index');
 Route::post('get-states-by-country','CountryStateCityController@getState');
 Route::post('get-cities-by-state','CountryStateCityController@getCity');
 
+// Route::get('country-state-city','JobsController@index');
+// Route::post('get-states-by-country','JobsController@getState');
+// Route::post('get-cities-by-state','JobsController@getCity');
 
 
