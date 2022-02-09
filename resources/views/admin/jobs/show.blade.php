@@ -64,8 +64,18 @@
                         <td>
                             {{ $job->contact_email }}
                         </td>
+
+                    
                     </tr>
-               
+                    <tr>
+                        <th>country and  City</th>
+                        <td>{{ $job->country ?? '' }}/ {{ $job->City ?? '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>starting_date and  Expiry_date</th>
+                        <td>{{ $job->starting_date ?? '' }}/ {{ $job->Expiry_date ?? '' }}</td>
+                    </tr>
+                    
                 </tbody>
             </table>
             <div class="form-group">
