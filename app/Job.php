@@ -27,6 +27,8 @@ class Job extends Model
         'starting_date' ,
         'Expiry_date' ,
         'contact_email',
+        'country',
+        'City',
         'image'
     ];
 

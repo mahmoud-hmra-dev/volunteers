@@ -85,10 +85,10 @@
             </div>
         </div>
         <div class="form-group">
-            <form>
+           
                 <div class="form-group">
                 <label for="country">Country</label>
-                <select class="form-control" id="country-dropdown">
+                <select class="form-control"  id="country-dropdown">
                 <option value="">Select Country</option>
                 @foreach ($countries as $country) 
                 <option value="{{$country->id}}">
@@ -99,12 +99,14 @@
                 </div>
                 <div class="form-group">
                 <label for="state">City</label>
-                <select class="form-control" id="state-dropdown">
+                <select class="form-control" id="state-dropdown" >
                 </select>
-                </div>                        
-                
-                </form>
+                </div>   
+                <input style="display: none" name="country" value="1" type="text" id="country">
+                <input style="display: none" name="City" value="2" type="text"  id="City">
+               
         </div>
+        
 
     
             <div class="form-group">
@@ -201,6 +203,25 @@
         });
         });
         });
+
+        document.getElementById("country-dropdown").onclick = function() {
+            var ddlViewBy = document.getElementById('country-dropdown');
+        var textcountry = ddlViewBy.options[ddlViewBy.selectedIndex].text;
+    
+   
+        document.getElementById('country').value = textcountry
+   
+
+
+        };
+        document.getElementById("state-dropdown").onclick = function() {
+  
+        var ddlViewBy = document.getElementById('state-dropdown');
+        var textCity = ddlViewBy.options[ddlViewBy.selectedIndex].text;
+     
+      
+        document.getElementById('City').value = textCity
+     };
         </script>
        
 @endsection

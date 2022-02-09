@@ -27,11 +27,12 @@
                             {{ trans('cruds.job.fields.title') }}
                         </th>
                         <th>
-                            starting date
+                            Starting and Expiry 
                         </th>
                         <th>
-                            Expiry date
+                            country and City 
                         </th>
+                      
                         <th>
                             {{ trans('cruds.job.fields.skills') }}
                         </th>
@@ -39,7 +40,8 @@
                             {{ trans('cruds.job.fields.description') }}
                         </th>
                         <th>
-                            {{ trans('cruds.job.fields.contact_email') }}
+                            description image
+                          
                         </th>
                         <th> image</th>
                         <th>
@@ -57,11 +59,12 @@
                                 {{ $job->title ?? '' }}
                             </td>
                             <td>
-                                {{ $job->starting_date ?? '' }}
+                                {{ $job->starting_date ?? '' }}/ {{ $job->Expiry_date ?? '' }}
                             </td>
                             <td>
-                                {{ $job->Expiry_date ?? '' }}
+                                {{ $job->country ?? '' }}/ {{ $job->City ?? '' }}
                             </td>
+                          
                             <td>
                                 @foreach($job->skills as $key => $item)
                                     <span class="badge badge-info">{{ $item->name }}</span>

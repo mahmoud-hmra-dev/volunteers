@@ -16,6 +16,8 @@ class CreateJobsTable extends Migration
             $table->string('Expiry_date');
             $table->string('contact_email');
             $table->string('image');
+            $table->string('country');
+            $table->string('City');
             $table->longText('description')->nullable();
         
             $table->timestamps();

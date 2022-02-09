@@ -22,6 +22,8 @@ class JobsTableSeeder extends Seeder
                 'starting_date' => $faker->sentence,
                 'Expiry_date' => $faker->sentence,
                 'image'=>'s',
+                'country'=>'m',
+                'City'=>'n',
                 
                
                 'contact_email' => $faker->companyEmail 

@@ -38,7 +38,7 @@ class JobsController extends Controller
     
         abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $countries = Country::get(["name","id"]);
-
+       
         $skills = Skill::all()->pluck('name', 'id');
 
         return view('admin.jobs.create', compact('skills','countries'));
@@ -54,7 +54,9 @@ class JobsController extends Controller
             'starting_date' ,
             'Expiry_date' ,
             'contact_email',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'City',
+            'country',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:9999',
         ]);
 
         $input = $request->all();
@@ -77,13 +79,14 @@ class JobsController extends Controller
 
     public function edit(Job $job)
     {
-        abort_if(Gate::denies('job_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $countries = Country::get(["name","id"]);
         $skills = Skill::all()->pluck('name', 'id');
 
         $job->load('skills');
 
-        return view('admin.jobs.edit', compact('skills', 'job'));
+        return view('admin.jobs.edit', compact('skills', 'job','countries'));
     }
 
     public function update(UpdateJobRequest $request, Job $job)
