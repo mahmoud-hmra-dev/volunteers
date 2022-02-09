@@ -11,8 +11,11 @@ class CountryStateCityController extends Controller
  
     public function index()
     {
-        $data['countries'] = Country::get(["name","id"]);
-        return view('country-state-city',$data);
+        
+        // $data['countries'] = Country::get(["name","id"]);
+        // return view('country-state-city',$data);
+        $countries = Country::get(["name","id"]);
+      return view('country-state-city',compact('countries'));
         
     }
     public function getState(Request $request)

@@ -12,9 +12,10 @@ class CreateJobsTable extends Migration
             $table->increments('id');
 
             $table->string('title');
-
+            $table->string('starting_date');
+            $table->string('Expiry_date');
             $table->string('contact_email');
-
+            $table->string('image');
             $table->longText('description')->nullable();
           
 

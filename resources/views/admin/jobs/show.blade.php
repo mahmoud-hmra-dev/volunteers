@@ -37,7 +37,7 @@
                         </th>
                         <td>
                             @foreach($job->skills as $key => $skills)
-                                <span class="label label-info">{{ $skills->name }}</span>
+                                <span class="label label-info">{{ $skills->name }}</span> /
                             @endforeach
                         </td>
                     </tr>
@@ -51,12 +51,21 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.job.fields.contact_email') }}
+                         image  
+                        </th>
+                        <td>
+                            <img src="{{ asset('image'.'/'.$job->image) }}" width="100px">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                         image  description 
                         </th>
                         <td>
                             {{ $job->contact_email }}
                         </td>
                     </tr>
+               
                 </tbody>
             </table>
             <div class="form-group">

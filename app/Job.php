@@ -24,8 +24,10 @@ class Job extends Model
         'updated_at',
         'deleted_at',
         'description',
-     
+        'starting_date' ,
+        'Expiry_date' ,
         'contact_email',
+        'image'
     ];
 
     public static function boot()

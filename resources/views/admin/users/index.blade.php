@@ -41,7 +41,7 @@
                             {{ trans('cruds.user.fields.skills') }}
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.notifications_frequency') }}
+                          Time
                         </th>
                         <th>
                             &nbsp;

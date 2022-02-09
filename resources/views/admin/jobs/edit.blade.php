@@ -21,6 +21,26 @@
                 <span class="help-block">{{ trans('cruds.job.fields.title_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="starting_date">starting_date</label>
+                <input class="form-control {{ $errors->has('starting_date') ? 'is-invalid' : '' }}" type="date" name="starting_date" id="starting_date" value="{{ old('starting_date', $job->starting_date) }}" required>
+                @if($errors->has('starting_date'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('starting_date') }}
+                    </div>
+                @endif
+              
+            </div>
+            <div class="form-group">
+                <label class="required" for="Expiry_date">Expiry_date</label>
+                <input class="form-control {{ $errors->has('Expiry_date') ? 'is-invalid' : '' }}" type="date" name="Expiry_date" id="Expiry_date" value="{{ old('Expiry_date', $job->Expiry_date) }}" required>
+                @if($errors->has('Expiry_date'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('Expiry_date') }}
+                    </div>
+                @endif
+   
+            </div>
+            <div class="form-group">
                 <label for="skills">{{ trans('cruds.job.fields.skills') }}</label>
                 <div style="padding-bottom: 4px">
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
@@ -49,7 +69,12 @@
                 <span class="help-block">{{ trans('cruds.job.fields.description_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="contact_email">{{ trans('cruds.job.fields.contact_email') }}</label>
+                <strong>Image:</strong>
+                <input type="file" name="image" class="form-control" placeholder="image"> <br>
+                <img src="{{ asset('image'.'/'.$job->image) }}" width="300px">
+            </div>
+            <div class="form-group">
+                <label class="required" for="contact_email">description IMAGE</label>
                 <input class="form-control {{ $errors->has('contact_email') ? 'is-invalid' : '' }}" type="text" name="contact_email" id="contact_email" value="{{ old('contact_email', $job->contact_email) }}" required>
                 @if($errors->has('contact_email'))
                     <div class="invalid-feedback">

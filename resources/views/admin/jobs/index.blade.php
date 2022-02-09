@@ -22,11 +22,15 @@
                         <th width="10">
 
                         </th>
-                        <th>
-                            {{ trans('cruds.job.fields.id') }}
-                        </th>
+                   
                         <th>
                             {{ trans('cruds.job.fields.title') }}
+                        </th>
+                        <th>
+                            starting date
+                        </th>
+                        <th>
+                            Expiry date
                         </th>
                         <th>
                             {{ trans('cruds.job.fields.skills') }}
@@ -37,6 +41,7 @@
                         <th>
                             {{ trans('cruds.job.fields.contact_email') }}
                         </th>
+                        <th> image</th>
                         <th>
                             &nbsp;
                         </th>
@@ -46,13 +51,16 @@
                     @foreach($jobs as $key => $job)
                         <tr data-entry-id="{{ $job->id }}">
                             <td>
-
-                            </td>
-                            <td>
-                                {{ $job->id ?? '' }}
+                               
                             </td>
                             <td>
                                 {{ $job->title ?? '' }}
+                            </td>
+                            <td>
+                                {{ $job->starting_date ?? '' }}
+                            </td>
+                            <td>
+                                {{ $job->Expiry_date ?? '' }}
                             </td>
                             <td>
                                 @foreach($job->skills as $key => $item)
@@ -65,6 +73,8 @@
                             <td>
                                 {{ $job->contact_email ?? '' }}
                             </td>
+                            <td><img src="{{ asset('image'.'/'.$job->image) }}" width="100px"></td>
+
                             <td>
                                 @can('job_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.jobs.show', $job->id) }}">
@@ -87,6 +97,7 @@
                                 @endcan
 
                             </td>
+                         
 
                         </tr>
                     @endforeach
