@@ -20,7 +20,7 @@
 
 
 
-
+@extends('navbar')
 {{--  --}}
 <div class="content">
     <div class="container">

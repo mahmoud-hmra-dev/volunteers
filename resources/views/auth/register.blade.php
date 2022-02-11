@@ -1,5 +1,9 @@
+
+@extends('navbar')
+
 @extends('layouts.app')
 @section('content')
+
 <body class="form-v10">
 
 

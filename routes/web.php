@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+// Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.jobs.index')->with('status', session('status'));
@@ -39,7 +40,7 @@ Route::get('/', function () {
     
 
     return view('welcome');
-});
+})->name('welcome');
 
 
 Route::get('country-state-city','CountryStateCityController@index');
