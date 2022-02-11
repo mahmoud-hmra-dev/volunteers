@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
+
 <div class="card">
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('cruds.job.title_singular') }}
@@ -86,10 +87,10 @@
         </div>
         <div class="form-group">
            
-                <div class="form-group">
-                <label for="country">Country</label>
+                <div style="width: 50%;" class="form-group">
+                <label for="country">Choose Country</label>
                 <select class="form-control"  id="country-dropdown">
-                <option value="">Select Country</option>
+                <option value=""></option>
                 @foreach ($countries as $country) 
                 <option value="{{$country->id}}">
                 {{$country->name}}
@@ -97,15 +98,45 @@
                 @endforeach
                 </select>
                 </div>
-                <div class="form-group">
-                <label for="state">City</label>
-                <select class="form-control" id="state-dropdown" >
-                </select>
-                </div>   
-                <input style="display: none" name="country" value="1" type="text" id="country">
-                <input style="display: none" name="City" value="2" type="text"  id="City">
+             
+                <input style="display: none"  name="country" value="1" type="text" id="country">
+                <input style="display: none"  name="City" value="2" type="text"  id="City">
                
         </div>
+        <div class="form-group">
+           <h2 style="text-align: center">select  cities</h2> 
+            <div style="justify-content: space-evenly" class="row text-center">
+               
+
+                <div class="col-md-3 col-md-offset-2">
+                    <select name="from[]" id="undo_redo" class="form-control" size="13" multiple="multiple">
+             
+                        </select>
+                </div>
+        
+                <div  class="col-md-2">
+                    {{-- <button  type="button" id="undo_redo_undo" class="btn btn-primary btn-block">undo</button>
+                    <button  type="button" id="undo_redo_rightAll" class="btn btn-default btn-block"><i class="glyphicon glyphicon-forward"></i></button> --}}
+                    <button style="background-color: aqua" type="button" id="undo_redo_rightSelected" class="btn btn-default btn-block">--></button>
+                    <button style="background-color: aqua" type="button" id="undo_redo_leftSelected" class="btn btn-default btn-block"><--</button>
+                    <button style="background-color: aqua"  type="button" id="undo_redo_leftAll" class="btn btn-default btn-block ">Delete All</button>
+                   
+                </div>
+        
+                <div class="col-md-3">
+                    <select name="to[]" id="undo_redo_to" class="form-control" size="13" multiple="multiple"></select>
+                </div>
+            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <script src="{{ URL::asset('multiselect.min.js') }}"></script>
+            <script>
+                $(function() {
+                    $('#undo_redo').multiselect();
+                });
+            </script>
+        </div>
+        
         
 
     
@@ -119,55 +150,13 @@
 </div>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function() {
-    $('#country-dropdown').on('change', function() {
-    var country_id = this.value;
-    $("#state-dropdown").html('');
-    $.ajax({
-    url:"{{url('get-states-by-country')}}",
-    type: "POST",
-    data: {
-    country_id: country_id,
-    _token: '{{csrf_token()}}' 
-    },
-    dataType : 'json',
-    success: function(result){
-    $('#state-dropdown').html('<option value="">Select State</option>'); 
-    $.each(result.states,function(key,value){
-    $("#state-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
-    });
-    $('#city-dropdown').html('<option value="">Select State First</option>'); 
-    }
-    });
-    });    
-    $('#state-dropdown').on('change', function() {
-    var state_id = this.value;
-    $("#city-dropdown").html('');
-    $.ajax({
-    url:"{{url('get-cities-by-state')}}",
-    type: "POST",
-    data: {
-    state_id: state_id,
-    _token: '{{csrf_token()}}' 
-    },
-    dataType : 'json',
-    success: function(result){
-    $('#city-dropdown').html('<option value="">Select City</option>'); 
-    $.each(result.cities,function(key,value){
-    $("#city-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
-    });
-    }
-    });
-    });
-    });
-    </script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+
     <script>
         $(document).ready(function() {
         $('#country-dropdown').on('change', function() {
         var country_id = this.value;
-        $("#state-dropdown").html('');
+        $("#undo_redo").html('');
         $.ajax({
         url:"{{url('get-states-by-country')}}",
         type: "POST",
@@ -178,13 +167,13 @@
         dataType : 'json',
         success: function(result){
         $.each(result.states,function(key,value){
-        $("#state-dropdown").append('<option value="'+value.id+'">'+value.name+'</option>');
+        $("#undo_redo").append('<option value="'+value.id+'">'+value.name+'</option>');
         });
         $('#city-dropdown').html('<option value="">Select State First</option>'); 
         }
         });
         });    
-        $('#state-dropdown').on('change', function() {
+        $('#undo_redo').on('change', function() {
         var state_id = this.value;
         $("#city-dropdown").html('');
         $.ajax({
@@ -210,17 +199,19 @@
     
    
         document.getElementById('country').value = textcountry
+        console.log(textcountry)
    
 
 
         };
-        document.getElementById("state-dropdown").onclick = function() {
+        document.getElementById("undo_redo").onclick = function() {
   
-        var ddlViewBy = document.getElementById('state-dropdown');
+        var ddlViewBy = document.getElementById('undo_redo');
         var textCity = ddlViewBy.options[ddlViewBy.selectedIndex].text;
      
       
         document.getElementById('City').value = textCity
+        console.log(textCity);
      };
         </script>
        
