@@ -103,10 +103,9 @@
                 <input style="display: none"  name="City" value="2" type="text"  id="City">
                
         </div>
-        <h1 style="">select  cities</h1> 
         <div class="form-group">
-          
-            <div id="mm" style="justify-self: start !important;" class="row ">
+           <h2 style="text-align: center">select  cities</h2> 
+            <div style="justify-content: space-evenly" class="row text-center">
                
 
                 <div class="col-md-3 col-md-offset-2">
