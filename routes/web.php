@@ -40,7 +40,7 @@ Route::get('/', function () {
     
 
     return view('welcome');
-});
+})->name('welcome');
 
 
 Route::get('country-state-city','CountryStateCityController@index');
