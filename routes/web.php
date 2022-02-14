@@ -36,9 +36,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('jobs', 'JobsController');
 });
 Route::get('/', function () {
- 
-    
-
     return view('welcome');
 })->name('welcome');
 
