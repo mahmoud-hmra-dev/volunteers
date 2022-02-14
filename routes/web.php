@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-Route::redirect('/', '/login');
+// Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
         return redirect()->route('admin.jobs.index')->with('status', session('status'));
@@ -35,7 +35,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('jobs/destroy', 'JobsController@massDestroy')->name('jobs.massDestroy');
     Route::resource('jobs', 'JobsController');
 });
-Route::get('/welcome', function () {
+Route::get('/', function () {
  
     
 
